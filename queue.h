@@ -9,40 +9,49 @@
 	 
 	 
 	 
-
+/* True is defined as 1 
+ */
 #ifndef TRUE
 #define TRUE     1
 #endif
 
-#ifndef FLASE
-#define FLASE    0
+/* False is defined as 0 
+ */
+#ifndef FALSE
+#define FALSE    0
 #endif
 
+/* Null is defined as (void *)0
+ */
 #ifndef NULL
 #define NULL    (void *)0
 #endif
 
 
 
-//
+/* Enumeration of queue status
+*/
 typedef enum
 {
-	QUE_UNINITIAL = 0,
-	QUE_INITIALED = 0xAA,
+	QUE_UNINITIAL = 0,       /* Uninitialized queue */
+	QUE_INITIALED = 0xAA,    /* Initialized queue */
 }QueState_t;
 
-//
+/* Structure of queue control block 
+*/
 typedef struct
 {
-	unsigned char * pFront;
-	unsigned char * pRear;
-	unsigned char * pBufOrigin;
-	unsigned int bufElementNumber;
-	unsigned int bufElementSize;
-	unsigned int bufElementCnt;
-	QueState_t queueStatus;
+	unsigned char * pFront;           /* Front address of the queue */
+	unsigned char * pRear;            /* Rear address of the queue */
+	unsigned char * pBufOrigin;       /* Origin address of queue */
+	unsigned int queElementNumber;    /* Number of queue elements */
+	unsigned int queElementSize;      /* Size of queue elements */
+	unsigned int queElementCnt;       /* Counters for queue elements */
+	QueState_t queueStatus;           /* Status of the queue */
 }QueueTCB_t;
 
+/* Pointer of queue control block
+*/
 typedef QueueTCB_t *pQueue_t;
 
 

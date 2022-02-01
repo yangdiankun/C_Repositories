@@ -1,14 +1,23 @@
-
-
-
+/*
+ * Copyright (C), 0000
+ * FileName: queue.c
+ * Description: 
+ * Change Logs: 
+    |Date           |Author       |Notes     |version
+    |2012-01-31     |yangdiankun  |XXX       |1.0.0
+ */
 #include "ringbuffer.h"
-
-
-
 
 // not overwritable
 
 
+
+/*
+Example:
+unsigned char rbBuf[10];
+rbTCB_t ringBuffer;
+rbCreate(&ringBuffer, rbBuf, sizeof(rbBuf));
+*/
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize)
 {
 	if ((rb == NULL) || (pRbBuf == NULL))
@@ -25,7 +34,10 @@ int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize)
 	return 0;
 }
 
-
+/*
+Example:
+rbDelete(&ringBuffer);
+*/
 int rbDelete(pRB_t rb)
 {
 	if (rb == NULL)
@@ -42,16 +54,28 @@ int rbDelete(pRB_t rb)
 	return 0;
 }
 
+/*
+Example:
+rbIsFull(&ringBuffer);
+*/
 unsigned char rbIsFull(pRB_t rb)
 {
 	return rb->bufCounter == rb->bufCapacity;
 }
 
+/*
+Example:
+rbIsEmpty(&ringBuffer);
+*/
 unsigned char rbIsEmpty(pRB_t rb)
 {
 	return rb->bufCounter == 0;
 }
 
+/*
+Example:
+rbCanReadBytes(&ringBuffer);
+*/
 unsigned int rbCanReadBytes(pRB_t rb)
 {
 	if (rb->rbStatus != RB_INITIALED)
@@ -61,7 +85,11 @@ unsigned int rbCanReadBytes(pRB_t rb)
 	
 	return rb->bufCounter;
 }
-	
+
+/*
+Example:
+rbCanWriteBytes(&ringBuffer);
+*/	
 unsigned int rbCanWriteBytes(pRB_t rb)
 {
 	if (rb->rbStatus != RB_INITIALED)
@@ -72,6 +100,11 @@ unsigned int rbCanWriteBytes(pRB_t rb)
 	return rb->bufCapacity - rb->bufCounter;
 }
 
+/*
+Example:
+unsigned char readData;
+rbReadOneByte(&ringBuffer, &readData);
+*/	
 int rbReadOneByte(pRB_t rb, unsigned char * pData)
 {
 	if ((rb->rbStatus != RB_INITIALED) || (rbIsEmpty(rb) == TRUE))
@@ -91,6 +124,11 @@ int rbReadOneByte(pRB_t rb, unsigned char * pData)
 	return 0;
 }
 
+/*
+Example:
+unsigned char writeData;
+rbWriteOneByte(&ringBuffer, writeData);
+*/
 int rbWriteOneByte(pRB_t rb, unsigned char data)
 {
 	if ((rb->rbStatus != RB_INITIALED) || (rbIsFull(rb) == TRUE))

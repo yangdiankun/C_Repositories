@@ -9,25 +9,35 @@
 	 
 	 
 
+/* True is defined as 1 
+ */
 #ifndef TRUE
 #define TRUE     1
 #endif
 
-#ifndef FLASE
-#define FLASE    0
+/* False is defined as 0 
+ */
+#ifndef FALSE
+#define FALSE    0
 #endif
 
+/* Null is defined as (void *)0
+ */
 #ifndef NULL
 #define NULL    (void *)0
 #endif
 
 
+/* Enumeration of ring buffer status
+*/
 typedef enum
 {
 	RB_UNINITIAL = 0,
 	RB_INITIALED = 0xAA,
 }rbState_t;
 
+/* Structure of queue ring buffer block 
+*/
 typedef struct
 {
 	unsigned char * pRead;
@@ -38,25 +48,21 @@ typedef struct
 	rbState_t rbStatus;
 }rbTCB_t;
 
+/* Pointer of queue ring buffer
+*/
 typedef rbTCB_t * pRB_t;
 
 
 
 
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize);
-
 int rbDelet(pRB_t rb);
-
 int rbReadOneByte(pRB_t rb, unsigned char * pData);
-
 int rbWriteOneByte(pRB_t rb, unsigned char pData);
-
 unsigned int rbCanReadBytes(pRB_t rb);
-
 unsigned int rbCanWriteBytes(pRB_t rb);
 
 unsigned char rbIsFull(pRB_t rb);
-
 unsigned char rbIsEmpty(pRB_t rb);
 
 

@@ -5,18 +5,17 @@
  * Change Logs: 
     |Date           |Author       |Notes     |version
     |2012-01-31     |yangdiankun  |XXX       |1.0.0
+	Note: The buffer is not overwritable
  */
 #include "queue.h"
-
-// not overwritable
 
 
 
 /*
-Example:
-struct QueueBuf_t queueBuf[10];
-QueueTCB_t queue;
-queueCreate(&queue, queueBuf, sizeof(queueBuf) / sizeof(queueBuf[0]), sizeof(queueBuf[0]));
+// Example:
+	struct QueueBuf_t queueBuf[10];
+	QueueTCB_t queue;
+	queueCreate(&queue, queueBuf, sizeof(queueBuf) / sizeof(queueBuf[0]), sizeof(queueBuf[0]));
 */
 int queueCreate(pQueue_t queue, void * pQueuebuf, unsigned int queElementNumber, unsigned int queElementSize)
 {
@@ -39,10 +38,10 @@ int queueCreate(pQueue_t queue, void * pQueuebuf, unsigned int queElementNumber,
 }
 
 /*
-Example:
-queueDelete(&queue);
+// Example:
+	queueRemove(&queue);
 */
-int queueDelete(pQueue_t queue)
+int queueRemove(pQueue_t queue)
 {
 	if (queue == NULL)
 	{
@@ -61,8 +60,8 @@ int queueDelete(pQueue_t queue)
 }
 
 /*
-Example:
-queueIsFull(&queue);
+// Example:
+	queueIsFull(&queue);
 */
 unsigned char queueIsFull(pQueue_t queue)
 {
@@ -70,8 +69,8 @@ unsigned char queueIsFull(pQueue_t queue)
 }
 
 /*
-Example:
-queueIsEmpty(&queue);
+// Example:
+	queueIsEmpty(&queue);
 */
 unsigned char queueIsEmpty(pQueue_t queue)
 {
@@ -79,8 +78,8 @@ unsigned char queueIsEmpty(pQueue_t queue)
 }
 
 /*
-Example:
-queueCanOut(&queue);
+// Example:
+	queueCanOut(&queue);
 */
 unsigned int queueCanOut(pQueue_t queue)
 {
@@ -88,8 +87,8 @@ unsigned int queueCanOut(pQueue_t queue)
 }
 
 /*
-Example:
-queueCanIn(&queue);
+// Example:
+	queueCanIn(&queue);
 */
 unsigned int queueCanIn(pQueue_t queue)
 {
@@ -97,9 +96,15 @@ unsigned int queueCanIn(pQueue_t queue)
 }
 
 /*
-Example:
-struct QueueBuf_t inQueueData;
-inQueue(&queue, &inQueueData);
+// Example:
+	typedef struct 
+	{
+		int a;
+		int b;
+	}QueueBuf_t;
+	QueueBuf_t inQueueData; // or
+	int inQueueData; 
+	inQueue(&queue, &inQueueData);
 */
 int inQueue(pQueue_t queue, const void * elementData)
 {
@@ -128,9 +133,15 @@ int inQueue(pQueue_t queue, const void * elementData)
 }
 
 /*
-Example:
-struct QueueBuf_t outQueueData;
-inQueue(&queue, &outQueueData);
+// Example:
+	typedef struct 
+	{
+		int a;
+		int b;
+	}QueueBuf_t;
+	QueueBuf_t outQueueData; // or
+	int outQueueData; 
+	inQueue(&queue, &outQueueData);
 */
 int outQueue(pQueue_t queue, void * elementData)
 {

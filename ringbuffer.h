@@ -56,7 +56,7 @@ typedef rbTCB_t * pRB_t;
 
 
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize);
-int rbDelet(pRB_t rb);
+int rbRemove(pRB_t rb);
 int rbReadOneByte(pRB_t rb, unsigned char * pData);
 int rbWriteOneByte(pRB_t rb, unsigned char pData);
 unsigned int rbCanReadBytes(pRB_t rb);

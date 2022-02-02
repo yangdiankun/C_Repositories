@@ -57,7 +57,7 @@ typedef QueueTCB_t *pQueue_t;
 
 
 int queueCreate(pQueue_t queue, void * pQueuebuf, unsigned int bufElementNumber, unsigned int bufElementSize);
-int queueDelete(pQueue_t queue);
+int queueRemove(pQueue_t queue);
 unsigned int queueCanIn(pQueue_t queue);
 unsigned int queueCanOut(pQueue_t queue);
 int inQueue(pQueue_t queue, void * elementData);

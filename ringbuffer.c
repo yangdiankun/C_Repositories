@@ -5,18 +5,18 @@
  * Change Logs: 
     |Date           |Author       |Notes     |version
     |2012-01-31     |yangdiankun  |XXX       |1.0.0
+   Note: The buffer is not overwritable
  */
 #include "ringbuffer.h"
 
-// not overwritable
 
 
 
 /*
-Example:
-unsigned char rbBuf[10];
-rbTCB_t ringBuffer;
-rbCreate(&ringBuffer, rbBuf, sizeof(rbBuf));
+// Example:
+	unsigned char rbBuf[10];
+	rbTCB_t ringBuffer;
+	rbCreate(&ringBuffer, rbBuf, sizeof(rbBuf));
 */
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize)
 {
@@ -35,10 +35,10 @@ int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize)
 }
 
 /*
-Example:
-rbDelete(&ringBuffer);
+// Example:
+	rbRemove(&ringBuffer);
 */
-int rbDelete(pRB_t rb)
+int rbRemove(pRB_t rb)
 {
 	if (rb == NULL)
 	{
@@ -55,8 +55,8 @@ int rbDelete(pRB_t rb)
 }
 
 /*
-Example:
-rbIsFull(&ringBuffer);
+// Example:
+	rbIsFull(&ringBuffer);
 */
 unsigned char rbIsFull(pRB_t rb)
 {
@@ -64,8 +64,8 @@ unsigned char rbIsFull(pRB_t rb)
 }
 
 /*
-Example:
-rbIsEmpty(&ringBuffer);
+// Example:
+	rbIsEmpty(&ringBuffer);
 */
 unsigned char rbIsEmpty(pRB_t rb)
 {
@@ -73,8 +73,8 @@ unsigned char rbIsEmpty(pRB_t rb)
 }
 
 /*
-Example:
-rbCanReadBytes(&ringBuffer);
+// Example:
+	rbCanReadBytes(&ringBuffer);
 */
 unsigned int rbCanReadBytes(pRB_t rb)
 {
@@ -87,8 +87,8 @@ unsigned int rbCanReadBytes(pRB_t rb)
 }
 
 /*
-Example:
-rbCanWriteBytes(&ringBuffer);
+// Example:
+	rbCanWriteBytes(&ringBuffer);
 */	
 unsigned int rbCanWriteBytes(pRB_t rb)
 {
@@ -101,9 +101,9 @@ unsigned int rbCanWriteBytes(pRB_t rb)
 }
 
 /*
-Example:
-unsigned char readData;
-rbReadOneByte(&ringBuffer, &readData);
+// Example:
+	unsigned char readData;
+	rbReadOneByte(&ringBuffer, &readData);
 */	
 int rbReadOneByte(pRB_t rb, unsigned char * pData)
 {
@@ -125,9 +125,9 @@ int rbReadOneByte(pRB_t rb, unsigned char * pData)
 }
 
 /*
-Example:
-unsigned char writeData;
-rbWriteOneByte(&ringBuffer, writeData);
+// Example:
+	unsigned char writeData;
+	rbWriteOneByte(&ringBuffer, writeData);
 */
 int rbWriteOneByte(pRB_t rb, unsigned char data)
 {

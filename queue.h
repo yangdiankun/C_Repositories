@@ -52,7 +52,7 @@ typedef struct
 
 /* Pointer of queue control block
 */
-typedef QueueTCB_t *pQueue_t;
+typedef QueueTCB_t * pQueue_t;
 
 
 

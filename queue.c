@@ -13,7 +13,13 @@
 
 /*
 // Example:
-	struct QueueBuf_t queueBuf[10];
+	typedef struct 
+	{
+		int a;
+		int b;
+	}QueueBuf_t;
+	QueueBuf_t queueBuf[10]; // or
+	int queueBuf[10];
 	QueueTCB_t queue;
 	queueCreate(&queue, queueBuf, sizeof(queueBuf) / sizeof(queueBuf[0]), sizeof(queueBuf[0]));
 */

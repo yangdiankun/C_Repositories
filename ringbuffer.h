@@ -46,11 +46,11 @@ typedef struct
 	unsigned int bufCounter;
 	unsigned int bufCapacity;
 	rbState_t rbStatus;
-}rbTCB_t;
+}rbCB_t;
 
 /* Pointer of queue ring buffer
 */
-typedef rbTCB_t * pRB_t;
+typedef rbCB_t * pRB_t;
 
 
 
@@ -58,7 +58,9 @@ typedef rbTCB_t * pRB_t;
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize);
 int rbRemove(pRB_t rb);
 int rbReadOneByte(pRB_t rb, unsigned char * pData);
+int rbReadMultiBytes(pRB_t rb, unsigned char * pData, unsigned int dataSize);
 int rbWriteOneByte(pRB_t rb, unsigned char pData);
+int rbWirteMultiBytes(pRB_t rb, const unsigned char * data, unsigned int dataSize);
 unsigned int rbCanReadBytes(pRB_t rb);
 unsigned int rbCanWriteBytes(pRB_t rb);
 

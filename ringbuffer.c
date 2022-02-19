@@ -14,8 +14,8 @@
 
 /*
 // Example:
-	unsigned char rbBuf[10];
-	rbTCB_t ringBuffer;
+	unsigned char rbBuf[100];
+	rbCB_t ringBuffer;
 	rbCreate(&ringBuffer, rbBuf, sizeof(rbBuf));
 */
 int rbCreate(pRB_t rb, unsigned char * pRbBuf, unsigned int bufSize)
@@ -112,15 +112,43 @@ int rbReadOneByte(pRB_t rb, unsigned char * pData)
 		return -1;
 	}
 	
-	rb->bufCounter--;
-	
 	*pData = *rb->pRead++;
+	rb->bufCounter--;
 	
 	if (rb->pRead == rb->rbBufOrigin + rb->bufCapacity)
 	{
 		rb->pRead = rb->rbBufOrigin;
 	}
 	
+	return 0;
+}
+
+/*
+// Example:
+	unsigned char readData[100];
+	rbReadMultiBytes(&ringBuffer, &readData[0], 10);
+*/	
+int rbReadMultiBytes(pRB_t rb, unsigned char * pData, unsigned int dataSize)
+{
+	unsigned int validDataLen;
+
+	if ((rb->rbStatus != RB_INITIALED) || (rbIsEmpty(rb) == TRUE))
+	{
+		return -1;
+	}
+
+	(dataSize > rb->bufCounter) ? 
+	(validDataLen = rb->bufCounter) : (validDataLen = dataSize);
+
+	while (validDataLen--)
+	{
+		*pData++ = *rb->pRead++;
+		rb->bufCounter--;
+		if (rb->pRead == rb->rbBufOrigin + rb->bufCapacity)
+		{
+			rb->pRead = rb->rbBufOrigin;
+		}
+	}
 	return 0;
 }
 
@@ -136,15 +164,43 @@ int rbWriteOneByte(pRB_t rb, unsigned char data)
 		return -1;
 	}
 	
-	rb->bufCounter++;
-	
 	*rb->pWrite++ = data;
+	rb->bufCounter++;
 	
 	if (rb->pWrite == rb->rbBufOrigin + rb->bufCapacity)
 	{
 		rb->pWrite = rb->rbBufOrigin;
 	}
 	
+	return 0;
+}
+
+/*
+// Example:
+	unsigned char writeData[100];
+	rbWirteMultiBytes(&ringBuffer, &writeData[0], 10);
+*/
+int rbWirteMultiBytes(pRB_t rb, const unsigned char * data, unsigned int dataSize)
+{
+	unsigned int validDataLen;
+
+	if ((rb->rbStatus != RB_INITIALED) || (rbIsFull(rb) == TRUE))
+	{
+		return -1;
+	}
+
+	(dataSize > rb->bufCapacity - rb->bufCounter) ? 
+	(validDataLen = rb->bufCapacity - rb->bufCounter) : (validDataLen = dataSize);
+	
+	while (validDataLen--)
+	{
+		*rb->pWrite++ = *data++;
+		rb->bufCounter++;
+		if (rb->pWrite == rb->rbBufOrigin + rb->bufCapacity)
+		{
+			rb->pWrite = rb->rbBufOrigin;
+		}
+	}
 	return 0;
 }
 
